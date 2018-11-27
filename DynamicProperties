@@ -1,0 +1,55 @@
+spring project
+
+* add file
++ application.properties,
++ application-local.properties,
++ application-dev.properties,
++ application-prod.properties
++ ConfigurationProfile.java
+
+* Copy ConfigurationProfiile.java file 
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+@Configuration
+@PropertySource("classpath:jinbid/sysbidanalys/property/application-${spring.profiles.active}.properties")
+public class ConfigurationProfile {
+
+	
+    @Value("${spring.profiles.active}")
+    private String active;
+    @Value("${spring.datasource2.url}")
+    private String checkDataSource;
+    
+
+	@Bean
+	public String runner() {
+			System.out.println("************************************************************ ");
+			System.out.println("*************** profile :: "+active + "    ******************** ");
+			System.out.println("*************** profile :: "+checkDataSource + "    ******************** ");
+			System.out.println("************************************************************ ");
+			return new String();
+			
+	};
+}
+
+* properties setting
+- application.properties
+  spring.datasource2.url=jdbc:mysql://xxx.xxx.xxx.001:3306/SY_ANLS
+- application-local.properties
+  spring.datasource2.url=jdbc:mysql://xxx.xxx.xxx.001:3306/SY_ANLS
+- application-dev.properties
+  spring.datasource2.url=jdbc:mysql://xxx.xxx.xxx.001:3306/SY_ANLS
+- application-prod.properties
+  spring.datasource2.url=jdbc:mysql://xxx.xxx.xxx.002:3306/SY_ANLS
+
+* tomcat run setting
+local : runConfiguration > Arguments > VM arguments  
+  -Dspring.profiles.active=local        add
+linux : tomcat > bin > vi setenv.sh 
+  JAVA_OPTS=" ${JAVA_OPTS} -Dspring.profiles.active=dev"    add
+
+  
