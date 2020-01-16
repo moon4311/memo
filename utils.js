@@ -9,8 +9,8 @@ function fnInjectionParams(params){
 		var target = $("[name="+key+"]");
 		var type = target.attr("type");
 		
-		if(target.is("select")){
-	//SELECT
+		if(target.is("select") || target.is("textarea")){
+	//SELECT, TEXTAREA
 			target.val(value);
 		}else if(target.is("input")){
 	//RADIO
