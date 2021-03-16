@@ -13,6 +13,8 @@
 
 
 2. 로컬그룹정책 실행
+https://docs.microsoft.com/en-us/troubleshoot/windows-server/remote/shadow-terminal-server-session
+
    windows키  gpedit.msc  실행
 1) 컴퓨터구성 > 관리템플릿 > windows 구성 요소 > 터미널 서비스 > 원격 데스크톱 세션 호스트 > 연결 
  -> 터미널 서비스 사용자 세션의 원격제어 규칙 설정
