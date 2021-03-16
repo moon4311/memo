@@ -1,0 +1,30 @@
+원격데스크탑연결 화면공유 ( shadow )
+
+
+1. 원격데스크톱 사용가능여부 확인 ( windows 버전 확인 )
+ 1)home 일경우
+  ㄱ.원격데스크톱 연결 기능 설치
+    rdpwup_4.zip
+    RDPWrap-v1.6.2.zip
+  ㄴ.로컬그룹정책 설치
+    gpedit.bat
+    https://mastmanban.tistory.com/1015
+ 2) pro는 생략
+
+
+2. 로컬그룹정책 실행
+   windows키  gpedit.msc  실행
+1) 컴퓨터구성 > 관리템플릿 > windows 구성 요소 > 터미널 서비스 > 원격 데스크톱 세션 호스트 > 연결 
+ -> 터미널 서비스 사용자 세션의 원격제어 규칙 설정
+  사용 ,   옵션 : 사용자의 허가 없이 모든 권한 부여
+  
+2) 컴퓨터구성 > 관리템플릿 > windows 구성 요소 > 터미널 서비스 > 원격 데스크톱 세션 호스트 > 연결 
+ -> 터미널 서비스 사용자 세션의 원격제어 규칙 설정
+  사용 ,   옵션 : 사용자의 허가 없이 모든 권한 부여
+
+3) windows powerShell 실행
+  -> gpupdate /force
+
+
+3. shadow 로 실행
+mstsc /v:192.168.10.113 /shadow:1 /control /prompt /noConsentPrompt
