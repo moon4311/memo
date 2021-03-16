@@ -27,6 +27,11 @@ https://docs.microsoft.com/en-us/troubleshoot/windows-server/remote/shadow-termi
 3) windows powerShell 실행
   -> gpupdate /force
 
+3. 레지스트리 확인 ( 없으면 추가 )
+컴퓨터\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+ -> 새로만들기 , DWORD(32)
+Shadow : 2
 
-3. shadow 로 실행
+
+4. shadow 로 실행
 mstsc /v:192.168.10.113 /shadow:1 /control /prompt /noConsentPrompt
