@@ -4,8 +4,10 @@
 1. 원격데스크톱 사용가능여부 확인 ( windows 버전 확인 )
  1)home 일경우
   ㄱ.원격데스크톱 연결 기능 설치
-    rdpwup_4.zip
     RDPWrap-v1.6.2.zip
+     install -> update -> RDPConf (serveiceState 옆 ver 확인)
+    rdpwup_4.zip
+     rdpwup -> 버전 입력
   ㄴ.로컬그룹정책 설치
     gpedit.bat
     https://mastmanban.tistory.com/1015
