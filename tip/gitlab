@@ -1,0 +1,17 @@
+
+
+Q. gitlab the project is still being deleted. please try again later
+
+
+A. 
+  1) 관리자 / 프로젝트로 이동 
+     gitlab go ->    /admin/projects
+  2) 개발자 도구를 연다
+     f12 key ( open develop tool )
+  3) 개발자도구 에서 프로젝트중 하나의 삭제버튼을 선택한다.
+    select delete button in develop tool
+    ex ) <button class="delete-project-button gl-button btn btn-danger" data-delete-project-url="/admin/projects/timopass/plink_iphone" data-project-name="plink_iphone">delete</button>
+  4) data-delete-project-url , data-project-name 를 지우고자 하는 프로젝트로 변경한다.
+  edit data-delete-projcect-url, data-project-name for delete project
+  5) 삭제 버튼을 누른다.
+  click delete
