@@ -1,0 +1,25 @@
+fdisk -l
+
+df -h 
+
+growpart /dev/mmcblk0 3      -> mmcblk0의 3번째 파티션을 확장
+pvresize /dev/mmcblk0p3      -> 추가되어있는 모든 용량을 파티션에 할당
+sudo resize2fs /dev/xvda1    
+
+
+--------------------------------------------------------------------
+파티션 할당
+
+fdisk -l   -> 저장소 확인
+
+fdisk /dev/mmcblk0   -> 파티션 관리
+
+m : menu
+p : partition list
+n : new partition
+w : save
+
+--------------------------------------------------------------------
+mount  /dev/mmcblk0p3 /home/test
+
+umont /dev/mmcblk0p3
