@@ -1,7 +1,5 @@
 
 /**
-  base : jquery, $.ajax
-
 	사용방법
 	1. 초기화
 	var memberApi = new restAPI('/members');
@@ -10,13 +8,13 @@
 	3. 한개조회
 	var member = memberApi.getInfo(data);
 	
-  
  */
-
 class restAPI {
 	path = "";
 	info = null;
 	list = [];
+	imgList = [];
+	childList = [];
 	
 	constructor(path){
 		this.path = path;
@@ -29,28 +27,44 @@ class restAPI {
 	
 	//한개 조회
 	getInfo(data){
-		get(this.path+"/info.json/"+data,null, (rslt)=>{ this.info= rslt.info; },true);
+		get(this.path+"/info.json/"+data,"", (rslt)=>{
+			this.info= rslt.info; 
+			if(rslt.imgList){	this.imgList 	= rslt.imgList; }
+			if(rslt.childList){ this.childList 	= rslt.childList; }
+		},true);
 		return this.info;
 	}
-	post(data){
-		 post(this.path+'/info.json', data, this.after, true  ); 
+	
+	//이미지리스트 조회
+	getImgList(data){
+		return this.imgList;
 	}
 	
-	put(data){
-		 put(this.path+'/info.json', data, this.after, true  );
+	getInfo2(data){
+		get(this.path+"/info.json",data, (rslt)=>{ this.info= rslt.info; },true);
+		return this.info;
 	}
 	
-	del(data){
-		 del(this.path+'/info.json', data, this.after, true  ); 
+	post(data, callback){
+		if(!callback) callback = this.after;
+		 post(this.path+'/info.json', data, callback, true  ); 
+	}
+	
+	put(data, callback){
+		if(!callback) callback = this.after;
+		 put(this.path+'/info.json', data, callback, true  );
+	}
+	
+	del(data, callback){
+		if(!callback) callback = this.after;
+		 del(this.path+'/info.json', data, callback, true  ); 
 	}
 
-	after(){
+	after(data){
 		try{
-			afterCustom();
+			afterCustom(data);
 		}catch(e){
 			console.log("Need to create function\n - afterCustom(); : 펑션");
 		}
-		
-		
 	}	
 }
