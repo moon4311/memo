@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration 
-//@ConfigurationProperties(prefix = "gmail")
 public class MailUtil {
 	 
-	// t_design / frommail.jsp
 	private static String mailTemplete = ""
 			+ "<!DOCTYPE html>\n" + "<html>\n" + "<head>\n" + "<meta charset=\"UTF-8\">\n"
 			+ "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0\">\n"
@@ -67,7 +65,6 @@ public class MailUtil {
         return userId;
     }
 
-    //application.yml의 gmail.api.userId을 set해준다.
     public static String getPassword() {
         return password;
     }
@@ -138,8 +135,6 @@ public class MailUtil {
 	    			else
 	    				message.setContent(body, "text/plain");
 	    		}
-
-//	            Transport.send(message);  
 	            Transport transport = session.getTransport("smtp");  
 	            transport.connect(getUserId(),getPassword());
 	            transport.sendMessage(message, message.getAllRecipients());
