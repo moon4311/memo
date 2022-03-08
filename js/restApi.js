@@ -68,3 +68,79 @@ class restAPI {
 		}
 	}	
 }
+
+
+
+function get(url,params, callback, async) {
+	commonAjax(url,"GET",params,callback,"json",async);
+}
+
+function post(url,params,callback,async){
+	if(params)
+		commonAjax(url,"POST", params,callback, "json",async);
+	else{
+		alert("저장할 데이터가 없습니다.");
+	}
+}
+function put(url,params,callback,async){
+	if(params)
+		commonAjax(url,"PUT", params,callback, "json",async);
+}
+function del(url,params,callback,async){
+	if(params)
+		commonAjax(url,"DELETE", params, callback, "json",async);
+}
+
+
+function commonAjax(url, method, params, callback, dataType,  async) {
+	if (!(dataType == "text" || dataType == "json")) {
+		dataType = "text";
+	}
+	if(typeof params != 'string'){
+		params = JSON.stringify(params);
+	}
+	
+	$.ajax({
+		type: method
+		, url: url
+		, dataType: dataType // text, html, script, json, jsonp, xml. (서버가 던져주는 데이터형.)
+		, async: !async
+		, headers: {'jwt' : jwt }
+		, contentType: "application/json;charset=UTF-8"
+		, data: params
+		, success: function(data, status) {
+			
+			if(data.cd == 100){
+				alert("로그인 후 이용해주시기 바랍니다.");
+				location.href="/members/login.do";
+			}else if(data.cd!=0 ) {
+				alert(data.msg);
+			} else {
+				if(data.msg != "OK") alert( data.msg );
+				if (!(callback === "" || callback === undefined || callback === null)) {
+					callback(data);
+				}
+			}
+		}
+		, error: function(request, status, statusText) {
+			if (request.status == "401") {
+				fnAlert(0, { message: "jwt 세션이 만료되었습니다." });
+			} else {
+				if (request.status == '200') {
+					callback();
+				} else if (status == 'error') {
+					fnAlert(0, { message: "세션이 만료되었거나 사용권한이 없습니다." });
+				} else {
+					fnAlert(0, { message: "작업중 오류가 발생하였습니다." });
+				}
+			}
+		}
+		, beforeSend: function() {
+			$('.spinner-box').show();
+		}
+		, complete: function() {
+			$('.spinner-box').hide();
+		}
+		, timeout: 100000
+	});
+}
