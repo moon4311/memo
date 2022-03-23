@@ -50,7 +50,7 @@ public class SseUtil {
     return sseEmitter;
   }
   
-  public static boolean send(String eventNm, String data) {
+    public static boolean send(String eventNm, String data) {
     System.err.println("before : "+getSize());
     for(Entry<String, SseEmitter> entry: sseEmitterCache.entrySet()) {
       try {
@@ -62,15 +62,18 @@ public class SseUtil {
       } catch (IOException ex) {
         removeList.add(entry.getKey());
         ex.printStackTrace();
-      } catch (java.lang.IllegalStateException ex) {
+      } catch (IllegalStateException ex) {
         removeList.add(entry.getKey());
         ex.printStackTrace();
+      } catch(Exception e) {
+        removeList.add(entry.getKey());
       }
     }
     
     for(String key : removeList) {
       sseEmitterCache.remove(key);
     }
+    removeList.clear();
     System.err.println("after : "+getSize());
     return true;
   }
