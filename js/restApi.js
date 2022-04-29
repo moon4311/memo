@@ -21,12 +21,16 @@ class restAPI {
 	}
 	//목록 조회
 	getList(data){
+		this.list = [];
 		get(this.path+"/list.json",data, (rslt)=>{ 	this.list = rslt.list; } ,true);
 		return this.list;
 	}
 	
 	//한개 조회
 	getInfo(data){
+		this.info = null;
+		this.imgList = [];
+		this.childList = [];
 		get(this.path+"/info.json/"+data,"", (rslt)=>{
 			this.info= rslt.info; 
 			if(rslt.imgList){	this.imgList 	= rslt.imgList; }
@@ -36,11 +40,14 @@ class restAPI {
 	}
 	
 	//이미지리스트 조회
-	getImgList(data){
+	getImgList(){
 		return this.imgList;
 	}
 	
 	getInfo2(data){
+		this.info = null;
+		this.imgList = [];
+		this.childList = [];
 		get(this.path+"/info.json",data, (rslt)=>{ this.info= rslt.info; },true);
 		return this.info;
 	}
